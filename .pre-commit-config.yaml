@@ -1,0 +1,45 @@
+repos:
+  - repo: local
+    hooks:
+      - id: requirements-prod
+        name: Generate requirements.txt
+        entry: uv
+        args: [pip, compile, pyproject.toml, -o, requirements.txt]
+        language: system
+        pass_filenames: false
+        always_run: true
+        stages: [pre-commit]
+
+      # - id: requirements-dev
+      #   name: Generate requirements-dev.txt
+      #   entry: uv
+      #   args:
+      #     [pip, compile, pyproject.toml, --extra, dev, -o, requirements-dev.txt]
+      #   language: system
+      #   pass_filenames: false
+      #   always_run: true
+      #   stages: [pre-commit]
+
+  - repo: https://github.com/charliermarsh/ruff-pre-commit
+    rev: v0.14.0
+    hooks:
+      - id: ruff
+        args: ["--fix"]
+
+  - repo: https://github.com/psf/black-pre-commit-mirror
+    rev: 25.9.0
+    hooks:
+      - id: black
+
+  - repo: https://github.com/PyCQA/isort
+    rev: 7.0.0
+    hooks:
+      - id: isort
+        args: [--profile, black]
+
+  # Add type checking with Pyright
+  - repo: https://github.com/DetachHead/basedpyright-prek-mirror
+    rev: 1.32.1
+    hooks:
+      - id: basedpyright
+        args: ["--level", "error"]

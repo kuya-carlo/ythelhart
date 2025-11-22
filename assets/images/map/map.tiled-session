@@ -1,0 +1,91 @@
+{
+    "activeFile": "main/map.tmx",
+    "expandedProjectPaths": [
+        "props",
+        "main",
+        "base",
+        ".",
+        "plants"
+    ],
+    "fileStates": {
+        "base/TX Tileset Grass.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "base/TX Tileset Stone Ground.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 2
+        },
+        "base/TX Tileset Wall.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 2
+        },
+        "main/TX Plant with Shadow.tsx": {
+            "scaleInDock": 1
+        },
+        "main/TX Plant.tsx": {
+            "scaleInDock": 1
+        },
+        "main/TX Props with Shadow.tsx": {
+            "scaleInDock": 1
+        },
+        "main/TX Props.tsx": {
+            "scaleInDock": 1
+        },
+        "main/TX Struct.tsx": {
+            "scaleInDock": 1
+        },
+        "main/TX Tileset Grass.tsx": {
+            "scaleInDock": 1
+        },
+        "main/TX Tileset Stone Ground.tsx": {
+            "scaleInDock": 1
+        },
+        "main/TX Tileset Wall.tsx": {
+            "scaleInDock": 1
+        },
+        "main/map.tmx": {
+            "scale": 3,
+            "selectedLayer": 4,
+            "viewCenter": {
+                "x": 572.8333333333333,
+                "y": 532.1666666666666
+            }
+        },
+        "plants/TX Plant with Shadow.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "plants/TX Plant.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "props/TX Props with Shadow.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1.5
+        },
+        "props/TX Props.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "structures/TX Struct.tsx": {
+            "scaleInDock": 1
+        }
+    },
+    "last.externalTilesetPath": "/home/kaoru/Projects/OOP Project/assets/images/map/plants",
+    "last.imagePath": "/home/kaoru/Projects/OOP Project/assets/images/map/props",
+    "openFiles": [
+        "main/map.tmx"
+    ],
+    "project": "map.tiled-project",
+    "recentFiles": [
+        "main/map.tmx",
+        "base/TX Tileset Grass.tsx",
+        "base/TX Tileset Stone Ground.tsx",
+        "base/TX Tileset Wall.tsx",
+        "plants/TX Plant.tsx",
+        "plants/TX Plant with Shadow.tsx",
+        "props/TX Props.tsx",
+        "props/TX Props with Shadow.tsx"
+    ]
+}

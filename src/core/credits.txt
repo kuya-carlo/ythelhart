@@ -1,0 +1,9 @@
+Asset Credits:
+Images:
+Universal LPC Spritesheet Generator
+
+Music:
+Hardware Haven Theme Music
+
+Tools:
+LibreSprite

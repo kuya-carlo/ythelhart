@@ -1,0 +1,18 @@
+__pycache__/
+*.pyc
+.idea/
+assets/tmp/
+
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+# Linting cache
+.ruff_cache
