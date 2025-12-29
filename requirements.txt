@@ -10,7 +10,7 @@ pygame==2.6.1
     # via gaemu (pyproject.toml)
 pyinstaller==6.16.0
     # via gaemu (pyproject.toml)
-pyinstaller-hooks-contrib==2025.9
+pyinstaller-hooks-contrib==2025.11
     # via pyinstaller
 pytmx==3.32
     # via gaemu (pyproject.toml)
