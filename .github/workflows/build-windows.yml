@@ -2,6 +2,10 @@ name: Build Windows Executable
 
 on:
   push:
+    paths:
+      - 'src/**'
+  release:
+    types: [published]
   workflow_dispatch:
 
 permissions:
@@ -28,7 +32,7 @@ jobs:
 
       - name: Build executable
         run: |
-          pyinstaller --onefile --windowed --add-data "assets/music:assets/music" --add-data "assets/images:assets/images" --add-data "assets/fonts:assets/fonts" --name Ythelhart src/main.py
+          pyinstaller --onefile --windowed --add-data "assets/music;assets/music" --add-data "assets/images;assets/images" --add-data "assets/fonts;assets/fonts" --name Ythelhart src/main.py
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
