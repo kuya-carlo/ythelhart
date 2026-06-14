@@ -176,7 +176,7 @@ class Game:
             spawn = None
 
         # If no spawn point is found, place the player in the center of the map
-        if spawn is None:
+        if spawn is None and self.map_surface is not None:
             self.player.rect.center = (
                 self.map_surface.get_width() // 2,
                 self.map_surface.get_height() // 2,

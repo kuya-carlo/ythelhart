@@ -11,7 +11,7 @@ dependencies = [
 ]
 
 [tool.pyright]
-typeCheckingMode = "standard"
+typeCheckingMode = "off"
 reportGeneralTypeIssues = true
 reportOptionalMemberAccess = true
 

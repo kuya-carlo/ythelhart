@@ -1,3 +1,5 @@
+from collections.abc import Callable
+
 import pygame
 
 from src.prefs import Extras, Style
@@ -13,7 +15,7 @@ class Button:
         The visual representation of the button.
     rect : pygame.Rect
         The position and dimensions of the button.
-    callback : callable
+    callback : Callable
         The function to execute when the button is clicked.
     text : str
         The text label displayed on the button.
@@ -24,7 +26,7 @@ class Button:
     """
 
     def __init__(
-        self, text: str, x: int, y: int, width: int, height: int, callback: callable
+        self, text: str, x: int, y: int, width: int, height: int, callback: Callable
     ):
         """
         Initializes a new Button instance.
