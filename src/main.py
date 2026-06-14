@@ -6,7 +6,7 @@ project_root = Path(__file__).resolve().parent.parent
 if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
 
-import pygame
+import pygame  # noqa: E402
 
 # Initialize everything
 pygame.init()

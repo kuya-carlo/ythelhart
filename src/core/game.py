@@ -14,7 +14,7 @@ import pytmx
 from src.core.camera import Camera
 from src.entity import Enemy, Player, Projectile
 from src.entity.minotaur import MinotaurBoss
-from src.entity.pickup import Pickup, spawn_random_pickup
+from src.entity.pickup import spawn_random_pickup
 from src.entity.rogue import Rogue
 from src.entity.tank import Tank
 from src.prefs import Constants, Map, Music, Style
@@ -622,6 +622,7 @@ class Game:
                     self.level_system.add_xp(xp_reward)
                     self.minotaur.xp_given = True
 
+                    minotaur_pos = self.minotaur.rect.center
                     for _ in range(3):  # Drop 3 pickups
                         offset_x = random.randint(-30, 30)
                         offset_y = random.randint(-30, 30)
@@ -914,7 +915,7 @@ class Game:
                 self.screen.blit(timer_bg, (timer_x, timer_y))
                 self.screen.blit(timer_text, (timer_x + 3, timer_y + 1))
 
-            except Exception as e:
+            except Exception:
                 # Fallback to simple colored square if image loading fails
                 pygame.draw.rect(
                     self.screen, (100, 100, 100), (start_x, y_pos, icon_size, icon_size)
