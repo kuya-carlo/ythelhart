@@ -8,7 +8,7 @@ import pygame
 from src.components import Button
 from src.prefs import Constants, Extras, Music, Style
 from src.screens import CreditsScreen, LeaderboardScreen
-from src.utils.background import setup_background, draw_background
+from src.utils.background import draw_background, setup_background
 
 from .progressbar import ProgressBar
 

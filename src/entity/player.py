@@ -432,7 +432,7 @@ class Player(pygame.sprite.Sprite):
             return int(self.frame) >= len(frames) - 1
         return True
 
-#---NEW---
+    # ---NEW---
 
     def add_speed_boost(self, multiplier: float, duration: float):
         """

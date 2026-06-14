@@ -14,11 +14,11 @@ import pytmx
 from src.core.camera import Camera
 from src.entity import Enemy, Player, Projectile
 from src.entity.minotaur import MinotaurBoss
+from src.entity.pickup import Pickup, spawn_random_pickup
 from src.entity.rogue import Rogue
 from src.entity.tank import Tank
-from src.entity.pickup import Pickup, spawn_random_pickup
-from src.prefs import Constants, Map, Style, Music
-from src.prefs.paths import UIAssets, MUSIC_PATH, PickupAssets
+from src.prefs import Constants, Map, Music, Style
+from src.prefs.paths import MUSIC_PATH, PickupAssets, UIAssets
 from src.screens.game_over import GameOverScreen
 from src.systems.level_system import LevelSystem, LevelUpUI, XPManager
 
@@ -605,11 +605,12 @@ class Game:
                     # Spawn pickup at enemy location
                     enemy_pos = enemy_states[id(enemy)][1]
                     if enemy_pos:
-                        pickup = spawn_random_pickup(enemy_pos[0], enemy_pos[1], drop_chance=0.3)
+                        pickup = spawn_random_pickup(
+                            enemy_pos[0], enemy_pos[1], drop_chance=0.3
+                        )
                         if pickup:
                             print("Enemy died! Attempting pickup spawn.")
                             self.pickups.add(pickup)
-
 
         # Special handling for the Minotaur boss
         if self.minotaur:
@@ -627,7 +628,7 @@ class Game:
                         pickup = spawn_random_pickup(
                             minotaur_pos[0] + offset_x,
                             minotaur_pos[1] + offset_y,
-                            drop_chance=1.0  # Boss always drops
+                            drop_chance=1.0,  # Boss always drops
                         )
                         if pickup:
                             self.pickups.add(pickup)
@@ -694,7 +695,9 @@ class Game:
             dx = self.player.rect.centerx - pickup.rect.centerx
             dy = self.player.rect.centery - pickup.rect.centery
             dist_sq = dx * dx + dy * dy
-            collection_radius = self.player.radius + 15  # Slightly larger collection range
+            collection_radius = (
+                self.player.radius + 15
+            )  # Slightly larger collection range
 
             if dist_sq <= collection_radius * collection_radius:
                 # Apply effect and show message
@@ -838,25 +841,31 @@ class Game:
 
         # Check which buffs are active and load corresponding images
         if self.player.speed_boost_timer > 0:
-            buffs.append({
-                'image_path': PickupAssets.SPEED_BOOST,
-                'timer': self.player.speed_boost_timer,
-                'name': 'Speed'
-            })
+            buffs.append(
+                {
+                    "image_path": PickupAssets.SPEED_BOOST,
+                    "timer": self.player.speed_boost_timer,
+                    "name": "Speed",
+                }
+            )
 
         if self.player.xp_multiplier_timer > 0:
-            buffs.append({
-                'image_path': PickupAssets.XP_MULTIPLIER,
-                'timer': self.player.xp_multiplier_timer,
-                'name': 'XP'
-            })
+            buffs.append(
+                {
+                    "image_path": PickupAssets.XP_MULTIPLIER,
+                    "timer": self.player.xp_multiplier_timer,
+                    "name": "XP",
+                }
+            )
 
         if self.player.damage_boost_timer > 0:
-            buffs.append({
-                'image_path': PickupAssets.DAMAGE_BOOST,
-                'timer': self.player.damage_boost_timer,
-                'name': 'DMG'
-            })
+            buffs.append(
+                {
+                    "image_path": PickupAssets.DAMAGE_BOOST,
+                    "timer": self.player.damage_boost_timer,
+                    "name": "DMG",
+                }
+            )
 
         # Draw each active buff
         for i, buff in enumerate(buffs):
@@ -864,12 +873,16 @@ class Game:
 
             try:
                 # Load and scale the pickup image
-                icon_img = pygame.image.load(str(buff['image_path'])).convert_alpha()
+                icon_img = pygame.image.load(str(buff["image_path"])).convert_alpha()
                 icon_img = pygame.transform.scale(icon_img, (icon_size, icon_size))
 
                 # Draw semi-transparent dark background
-                bg_rect = pygame.Rect(start_x - 2, y_pos - 2, icon_size + 4, icon_size + 4)
-                bg_surface = pygame.Surface((bg_rect.width, bg_rect.height), pygame.SRCALPHA)
+                bg_rect = pygame.Rect(
+                    start_x - 2, y_pos - 2, icon_size + 4, icon_size + 4
+                )
+                bg_surface = pygame.Surface(
+                    (bg_rect.width, bg_rect.height), pygame.SRCALPHA
+                )
                 bg_surface.fill((0, 0, 0, 128))
                 self.screen.blit(bg_surface, bg_rect)
 
@@ -877,14 +890,22 @@ class Game:
                 self.screen.blit(icon_img, (start_x, y_pos))
 
                 # Draw white border
-                pygame.draw.rect(self.screen, (255, 255, 255),
-                                 (start_x, y_pos, icon_size, icon_size), 2)
+                pygame.draw.rect(
+                    self.screen,
+                    (255, 255, 255),
+                    (start_x, y_pos, icon_size, icon_size),
+                    2,
+                )
 
                 # Draw timer below the icon
                 timer_font = pygame.font.Font(None, 18)
-                timer_text = timer_font.render(f"{buff['timer']:.1f}s", True, (255, 255, 255))
-                timer_bg = pygame.Surface((timer_text.get_width() + 6, timer_text.get_height() + 2),
-                                          pygame.SRCALPHA)
+                timer_text = timer_font.render(
+                    f"{buff['timer']:.1f}s", True, (255, 255, 255)
+                )
+                timer_bg = pygame.Surface(
+                    (timer_text.get_width() + 6, timer_text.get_height() + 2),
+                    pygame.SRCALPHA,
+                )
                 timer_bg.fill((0, 0, 0, 180))
 
                 timer_x = start_x + (icon_size - timer_text.get_width()) // 2 - 3
@@ -895,10 +916,15 @@ class Game:
 
             except Exception as e:
                 # Fallback to simple colored square if image loading fails
-                pygame.draw.rect(self.screen, (100, 100, 100),
-                                 (start_x, y_pos, icon_size, icon_size))
-                pygame.draw.rect(self.screen, (255, 255, 255),
-                                 (start_x, y_pos, icon_size, icon_size), 2)
+                pygame.draw.rect(
+                    self.screen, (100, 100, 100), (start_x, y_pos, icon_size, icon_size)
+                )
+                pygame.draw.rect(
+                    self.screen,
+                    (255, 255, 255),
+                    (start_x, y_pos, icon_size, icon_size),
+                    2,
+                )
 
     def _draw_hud(self):
         """Draws the Heads-Up Display (health, stamina, XP bars, wave count)."""

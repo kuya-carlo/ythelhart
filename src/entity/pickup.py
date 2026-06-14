@@ -8,9 +8,10 @@ damage boosts, and health restoration.
 
 import random
 from enum import Enum
-from src.prefs.paths import PickupAssets
 
 import pygame
+
+from src.prefs.paths import PickupAssets
 
 
 class PickupType(Enum):
@@ -19,6 +20,7 @@ class PickupType(Enum):
 
     Each pickup provides a different bonus to the player.
     """
+
     SPEED_BOOST = "speed"  # Temporary movement speed increase
     XP_MULTIPLIER = "xp"  # Temporary 2x XP gain
     DAMAGE_BOOST = "damage"  # Temporary 2x damage
@@ -148,7 +150,9 @@ class Pickup(pygame.sprite.Sprite):
 
         # Bounce animation
         self.bounce_timer += dt * 5
-        bounce_offset = int(abs(pygame.math.Vector2(0, 1).rotate(self.bounce_timer * 180).y) * 5)
+        bounce_offset = int(
+            abs(pygame.math.Vector2(0, 1).rotate(self.bounce_timer * 180).y) * 5
+        )
         self.rect.centery = int(self.y) - bounce_offset
 
     def draw(self, surface: pygame.Surface, camera=None):
@@ -183,22 +187,33 @@ class Pickup(pygame.sprite.Sprite):
             A message describing the effect applied.
         """
         if self.pickup_type == PickupType.SPEED_BOOST:
-            player.add_speed_boost(self.VALUES[PickupType.SPEED_BOOST], self.DURATION[PickupType.SPEED_BOOST])
+            player.add_speed_boost(
+                self.VALUES[PickupType.SPEED_BOOST],
+                self.DURATION[PickupType.SPEED_BOOST],
+            )
             return f"Speed Boost! +{int((self.VALUES[PickupType.SPEED_BOOST] - 1) * 100)}% speed for {self.DURATION[PickupType.SPEED_BOOST]}s"
 
         elif self.pickup_type == PickupType.XP_MULTIPLIER:
-            player.add_xp_multiplier(self.VALUES[PickupType.XP_MULTIPLIER], self.DURATION[PickupType.XP_MULTIPLIER])
+            player.add_xp_multiplier(
+                self.VALUES[PickupType.XP_MULTIPLIER],
+                self.DURATION[PickupType.XP_MULTIPLIER],
+            )
             return f"XP Multiplier! {self.VALUES[PickupType.XP_MULTIPLIER]}x XP for {self.DURATION[PickupType.XP_MULTIPLIER]}s"
 
         elif self.pickup_type == PickupType.DAMAGE_BOOST:
-            player.add_damage_boost(self.VALUES[PickupType.DAMAGE_BOOST], self.DURATION[PickupType.DAMAGE_BOOST])
+            player.add_damage_boost(
+                self.VALUES[PickupType.DAMAGE_BOOST],
+                self.DURATION[PickupType.DAMAGE_BOOST],
+            )
             return f"Damage Boost! {self.VALUES[PickupType.DAMAGE_BOOST]}x damage for {self.DURATION[PickupType.DAMAGE_BOOST]}s"
 
         elif self.pickup_type == PickupType.HEALTH_RESTORE:
             max_hp = player.get_effective_max_hp()
             if player.hp >= max_hp:
                 return "Health full! Pickup ignored."
-            heal_amount = min(self.VALUES[PickupType.HEALTH_RESTORE], max_hp - player.hp)
+            heal_amount = min(
+                self.VALUES[PickupType.HEALTH_RESTORE], max_hp - player.hp
+            )
             player.hp += heal_amount
             return f"Health Restored! +{int(heal_amount)} HP"
 

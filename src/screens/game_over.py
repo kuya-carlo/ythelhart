@@ -1,9 +1,10 @@
 import pygame
 
 from src.components.button import Button
-from src.prefs import Constants, Style, Backgrounds
+from src.prefs import Backgrounds, Constants, Style
 from src.screens.leaderboard import LeaderboardScreen
 from src.screens.name_input import NameInputScreen
+
 
 class GameOverScreen:
     def __init__(self, screen, wave):
@@ -31,7 +32,7 @@ class GameOverScreen:
             (Constants.Game.SCREEN_WIDTH, Constants.Game.SCREEN_HEIGHT)
         )
         self.dim_overlay.fill((0, 0, 0))
-        self.dim_overlay.set_alpha(225) # 0 = fully transparent, 255 = fully opaque
+        self.dim_overlay.set_alpha(225)  # 0 = fully transparent, 255 = fully opaque
 
         button_width = 300
         button_height = 60

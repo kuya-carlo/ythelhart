@@ -14,3 +14,6 @@ dependencies = [
 typeCheckingMode = "standard"
 reportGeneralTypeIssues = true
 reportOptionalMemberAccess = true
+
+[tool.isort]
+profile = "black"

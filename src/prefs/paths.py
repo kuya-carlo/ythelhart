@@ -176,6 +176,7 @@ class Map:
         BASE_PATH = MAP_PATH / "structures"
         MAIN = MapAsset(BASE_PATH, "TX Struct")
 
+
 class PickupAssets:
     SIZE = 24
     SPEED_BOOST = PICKUP_PATH / "SpeedBoost.png"

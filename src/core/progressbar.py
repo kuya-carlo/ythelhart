@@ -5,9 +5,9 @@ typically used for loading screens.
 
 import pygame
 
-from src.prefs import Constants, Backgrounds
+from src.prefs import Backgrounds, Constants
 from src.prefs.paths import Extras
-from src.utils.background import setup_background, draw_background
+from src.utils.background import draw_background, setup_background
 
 
 class ProgressBar:

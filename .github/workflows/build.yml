@@ -1,4 +1,4 @@
-name: Build Windows Executable
+name: Build Executables
 
 on:
   push:
@@ -13,7 +13,20 @@ permissions:
 
 jobs:
   build:
-    runs-on: windows-latest
+    name: Build on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            artifact-name: Ythelhart-Linux
+            separator: ":"
+            binary-name: Ythelhart
+          - os: windows-latest
+            artifact-name: Ythelhart-Windows
+            separator: ";"
+            binary-name: Ythelhart.exe
 
     steps:
       - uses: actions/checkout@v4
@@ -27,18 +40,18 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          # Uncomment if you have a requirements.txt:
           pip install -r requirements.txt
 
       - name: Build executable
+        shell: bash
         run: |
-          pyinstaller --onefile --windowed --add-data "assets/music;assets/music" --add-data "assets/images;assets/images" --add-data "assets/fonts;assets/fonts" --name Ythelhart src/main.py
+          pyinstaller --onefile --windowed --add-data "assets/music${{ matrix.separator }}assets/music" --add-data "assets/images${{ matrix.separator }}assets/images" --add-data "assets/fonts${{ matrix.separator }}assets/fonts" --name Ythelhart src/main.py
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: Ythelhart-Windows
-          path: dist/Ythelhart.exe
+          name: ${{ matrix.artifact-name }}
+          path: dist/${{ matrix.binary-name }}
           retention-days: 30
 
       # Optional: Create release when pushing a tag
@@ -46,6 +59,6 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/v')
         uses: softprops/action-gh-release@v1
         with:
-          files: dist/Ythelhart.exe
+          files: dist/${{ matrix.binary-name }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
