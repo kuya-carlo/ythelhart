@@ -14,7 +14,7 @@ pyinstaller-hooks-contrib==2025.9
     # via pyinstaller
 pytmx==3.32
     # via gaemu (pyproject.toml)
-setuptools==80.9.0
+setuptools==80.10.2
     # via
     #   pyinstaller
     #   pyinstaller-hooks-contrib
